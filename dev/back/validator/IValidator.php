@@ -1,6 +1,6 @@
 <?php
 
-namespace daily\IValidator;
+namespace daily\validator\IValidator;
 
 use daily\Result\Result;
 

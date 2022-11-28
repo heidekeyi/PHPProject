@@ -2,8 +2,9 @@
 
 namespace daily\validator\UriValidator;
 
-use daily\IValidator\IValidator;
+
 use daily\Result\Result;
+use daily\validator\IValidator\IValidator;
 
 class UriValidator implements IValidator
 {
@@ -14,11 +15,12 @@ class UriValidator implements IValidator
 
     public function validate(): Result
     {
-        return $this->result;
+        return $this->empty()->result;
     }
 
     private function empty(): UriValidator
     {
+        $this->result->message('uri is empty')->status(false);
         return $this;
     }
 
