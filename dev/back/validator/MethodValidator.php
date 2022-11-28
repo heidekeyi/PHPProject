@@ -1,9 +1,9 @@
 <?php
 
-namespace daily\validator\MethodValidator;
+namespace validator\MethodValidator;
 
-use daily\Result\Result;
-use daily\validator\IValidator\IValidator;
+use Result\Result;
+use validator\IValidator\IValidator;
 
 class MethodValidator implements IValidator
 {

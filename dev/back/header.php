@@ -1,7 +1,7 @@
 <?php
 
 
-namespace daily\Header;
+namespace Header;
 
 return function (): void {
     header('Content-Type: application/json; charset=utf-8');

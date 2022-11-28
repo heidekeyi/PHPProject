@@ -1,6 +1,6 @@
 <?php
 
-namespace daily\Result;
+namespace Result;
 
 class Result
 {
@@ -9,6 +9,11 @@ class Result
         $this->data = $data;
         $this->message = $message;
         $this->status = $status;
+    }
+
+    public function error(string $message): Result
+    {
+        return $this->message($message)->status(false);
     }
 
     public function message(string $message): Result

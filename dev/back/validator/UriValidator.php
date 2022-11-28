@@ -1,10 +1,10 @@
 <?php
 
-namespace daily\validator\UriValidator;
+namespace validator\UriValidator;
 
 
-use daily\Result\Result;
-use daily\validator\IValidator\IValidator;
+use Result\Result;
+use validator\IValidator\IValidator;
 
 class UriValidator implements IValidator
 {
@@ -22,9 +22,7 @@ class UriValidator implements IValidator
     private function empty(): UriValidator
     {
         if (empty($this->uri)) {
-            $this->result
-                ->message('uri is empty')
-                ->status(false);
+            $this->result->error('uri is empty');
         }
         return $this;
     }
@@ -32,9 +30,7 @@ class UriValidator implements IValidator
     private function rule(): UriValidator
     {
         if (!preg_match('/^[a-z]{3,18}(\/[a-z]{3,18}){0,3}(\/[1-9]\d{0,17})*$/', $this->uri)) {
-            $this->result
-                ->message('uri is invalid')
-                ->status(false);
+            $this->result->error('uri is invalid');
         }
         return $this;
     }

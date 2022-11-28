@@ -1,6 +1,6 @@
 <?php
 
-namespace daily\Config;
+namespace config;
 
 return function (): array {
     return [

@@ -1,12 +1,12 @@
 <?php
 
-namespace daily\Router;
+namespace Router;
 
-use daily\Result\Result;
-use daily\validator\ControllerValidator\ControllerValidator;
-use daily\validator\MethodValidator\MethodValidator;
-use daily\validator\TypeValidator\TypeValidator;
-use daily\validator\UriValidator\UriValidator;
+use Result\Result;
+use validator\ControllerValidator\ControllerValidator;
+use validator\MethodValidator\MethodValidator;
+use validator\TypeValidator\TypeValidator;
+use validator\UriValidator\UriValidator;
 
 class Router
 {
@@ -17,9 +17,10 @@ class Router
         $this->type = new Result('');
         $this->controller = new Result('');
         $this->method = new Result('');
+        $this->next = true;
     }
 
-    public function route(): void
+    public function execute(): void
     {
         $this->uri()
             ->type()
@@ -42,13 +43,14 @@ class Router
             $this->result
                 = $this->type
                 = (new TypeValidator($this->uri->data))->validate();
+            $this->next = !empty($this->result->data);
         }
         return $this;
     }
 
     private function controller(): Router
     {
-        if ($this->result->status) {
+        if ($this->next && $this->result->status) {
             $this->result
                 = $this->controller
                 = (new ControllerValidator($this->uri->data, $this->type->data))->validate();
@@ -58,7 +60,7 @@ class Router
 
     private function method(): Router
     {
-        if ($this->result->status) {
+        if ($this->next && $this->result->status) {
             $this->result
                 = $this->method
                 = (new MethodValidator($this->controller->data, $this->type->data))->validate();
@@ -76,4 +78,5 @@ class Router
     private Result $controller;
     private Result $method;
     private Result $result;
+    private bool $next;
 }

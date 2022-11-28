@@ -1,9 +1,9 @@
 <?php
 
-namespace daily\validator\ControllerValidator;
+namespace validator\ControllerValidator;
 
-use daily\Result\Result;
-use daily\validator\IValidator\IValidator;
+use Result\Result;
+use validator\IValidator\IValidator;
 
 class ControllerValidator implements IValidator
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace daily\validator\IValidator;
+namespace validator\IValidator;
 
-use daily\Result\Result;
+use Result\Result;
 
 interface IValidator
 {

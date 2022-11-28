@@ -1,6 +1,6 @@
 <?php
 
-namespace daily\api;
+namespace api;
 
 (include_once '../back/autoLoad.php')();
 (include_once '../back/header.php')();

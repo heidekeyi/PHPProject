@@ -1,9 +1,9 @@
 <?php
 
-namespace daily\bootstrap;
+namespace bootstrap;
 
-use daily\Router\Router;
+use Router\Router;
 
 return function (): void {
-    (new Router())->route();
+    (new Router())->execute();
 };
