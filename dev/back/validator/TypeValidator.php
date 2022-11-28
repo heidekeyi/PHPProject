@@ -40,11 +40,7 @@ class TypeValidator implements IValidator
     private function select(): TypeValidator
     {
         if ($this->result->status && $this->type === 'get') {
-            if ($this->isRest) {
-                $this->result->data('fetchOne');
-            } else {
-                $this->result->data('fetchMany');
-            }
+            $this->result->data(__FUNCTION__);
         }
         return $this;
     }

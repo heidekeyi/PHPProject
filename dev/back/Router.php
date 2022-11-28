@@ -4,7 +4,6 @@ namespace Router;
 
 use Result\Result;
 use validator\ControllerValidator\ControllerValidator;
-use validator\MethodValidator\MethodValidator;
 use validator\TypeValidator\TypeValidator;
 use validator\UriValidator\UriValidator;
 
@@ -16,7 +15,6 @@ class Router
         $this->uri = new Result('');
         $this->type = new Result('');
         $this->controller = new Result('');
-        $this->method = new Result('');
         $this->next = true;
     }
 
@@ -25,7 +23,7 @@ class Router
         $this->uri()
             ->type()
             ->controller()
-            ->method()
+            ->route()
             ->json();
     }
 
@@ -58,13 +56,14 @@ class Router
         return $this;
     }
 
-    private function method(): Router
+    private function route(): Router
     {
         if ($this->next && $this->result->status) {
-            $this->result
-                = $this->method
-                = (new MethodValidator($this->controller->data, $this->type->data))->validate();
+            $cls = $this->controller->data;
+            $method = $this->type->data;
+            $this->result = call_user_func([new $cls($this->uri->data), $method]);
         }
+
         return $this;
     }
 
@@ -76,7 +75,6 @@ class Router
     private Result $uri;
     private Result $type;
     private Result $controller;
-    private Result $method;
     private Result $result;
     private bool $next;
 }
