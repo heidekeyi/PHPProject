@@ -30,20 +30,18 @@ class Router
 
     private function uri(): Router
     {
-        $this->uri = (new UriValidator())->validate();
-        if (!$this->uri->status) {
-            $this->result = $this->uri;
-        }
+        $this->result
+            = $this->uri
+            = (new UriValidator())->validate();
         return $this;
     }
 
     private function type(): Router
     {
         if ($this->result->status) {
-            $this->type = (new TypeValidator($this->uri->data))->validate();
-            if (!$this->type->status) {
-                $this->result = $this->type;
-            }
+            $this->result
+                = $this->type
+                = (new TypeValidator($this->uri->data))->validate();
         }
         return $this;
     }
@@ -51,10 +49,9 @@ class Router
     private function controller(): Router
     {
         if ($this->result->status) {
-            $this->controller = (new ControllerValidator($this->uri->data, $this->type->data))->validate();
-            if (!$this->controller->status) {
-                $this->result = $this->controller;
-            }
+            $this->result
+                = $this->controller
+                = (new ControllerValidator($this->uri->data, $this->type->data))->validate();
         }
         return $this;
     }
@@ -62,10 +59,9 @@ class Router
     private function method(): Router
     {
         if ($this->result->status) {
-            $this->method = (new MethodValidator($this->controller->data, $this->type->data))->validate();
-            if (!$this->method->status) {
-                $this->result = $this->method;
-            }
+            $this->result
+                = $this->method
+                = (new MethodValidator($this->controller->data, $this->type->data))->validate();
         }
         return $this;
     }
