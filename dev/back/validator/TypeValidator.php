@@ -9,9 +9,9 @@ class TypeValidator implements IValidator
 {
     public function __construct(string $uri)
     {
-        $this->isRest = preg_match('/\d+$/', $uri);
-        $this->type = strtolower($_SERVER['REQUEST_METHOD']);
-        $this->result = new Result('');
+        $this->mIsRest = preg_match('/\d+$/', $uri);
+        $this->mType = strtolower($_SERVER['REQUEST_METHOD']);
+        $this->mResult = new Result('');
 
     }
 
@@ -22,16 +22,16 @@ class TypeValidator implements IValidator
             ->update()
             ->delete()
             ->preRequest()
-            ->result;
+            ->mResult;
     }
 
     private function insert(): TypeValidator
     {
-        if ($this->result->status && $this->type === 'post') {
-            if ($this->isRest) {
-                $this->result->error('request type error on post');
+        if ($this->mResult->mStatus && $this->mType === 'post') {
+            if ($this->mIsRest) {
+                $this->mResult->error('request type error on post');
             } else {
-                $this->result->data(__FUNCTION__);
+                $this->mResult->data(__FUNCTION__);
             }
         }
         return $this;
@@ -39,19 +39,19 @@ class TypeValidator implements IValidator
 
     private function select(): TypeValidator
     {
-        if ($this->result->status && $this->type === 'get') {
-            $this->result->data(__FUNCTION__);
+        if ($this->mResult->mStatus && $this->mType === 'get') {
+            $this->mResult->data(__FUNCTION__);
         }
         return $this;
     }
 
     private function update(): TypeValidator
     {
-        if ($this->result->status && $this->type === 'put') {
-            if ($this->isRest) {
-                $this->result->data(__FUNCTION__);
+        if ($this->mResult->mStatus && $this->mType === 'put') {
+            if ($this->mIsRest) {
+                $this->mResult->data(__FUNCTION__);
             } else {
-                $this->result->error('request type error on put');
+                $this->mResult->error('request type error on put');
             }
         }
         return $this;
@@ -59,11 +59,11 @@ class TypeValidator implements IValidator
 
     private function delete(): TypeValidator
     {
-        if ($this->result->status && $this->type === 'delete') {
-            if ($this->isRest) {
-                $this->result->data(__FUNCTION__);
+        if ($this->mResult->mStatus && $this->mType === 'delete') {
+            if ($this->mIsRest) {
+                $this->mResult->data(__FUNCTION__);
             } else {
-                $this->result->error('request type error on delete');
+                $this->mResult->error('request type error on delete');
             }
         }
         return $this;
@@ -71,13 +71,13 @@ class TypeValidator implements IValidator
 
     private function preRequest(): TypeValidator
     {
-        if ($this->type === 'options') {
-            $this->result->message('pass')->data('');
+        if ($this->mType === 'options') {
+            $this->mResult->message('pass')->data('');
         }
         return $this;
     }
 
-    private Result $result;
-    readonly private bool $isRest;
-    readonly private string $type;
+    private Result $mResult;
+    readonly private bool $mIsRest;
+    readonly private string $mType;
 }

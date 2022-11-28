@@ -11,9 +11,9 @@ abstract class SelectController extends Controller implements ISelectController
     public function select(): Result
     {
         if (empty($this->id())) {
-            return $this->one();
-        } else {
             return $this->many();
+        } else {
+            return $this->one();
         }
     }
 

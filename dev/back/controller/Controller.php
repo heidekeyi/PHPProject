@@ -6,13 +6,13 @@ class Controller
 {
     public function __construct(string $uri)
     {
-        $this->id = preg_replace('/^[a-z\/]+/', '', $uri);
+        $this->mId = preg_replace('/^[a-z\/]+/', '', $uri);
     }
 
     protected function id(): string
     {
-        return $this->id;
+        return $this->mId;
     }
 
-    readonly private string $id;
+    readonly private string $mId;
 }

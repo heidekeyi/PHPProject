@@ -6,9 +6,9 @@ class Result
 {
     public function __construct(mixed $data, string $message = '', bool $status = true)
     {
-        $this->data = $data;
-        $this->message = $message;
-        $this->status = $status;
+        $this->mData = $data;
+        $this->mMessage = $message;
+        $this->mStatus = $status;
     }
 
     public function error(string $message): Result
@@ -18,23 +18,23 @@ class Result
 
     public function message(string $message): Result
     {
-        $this->message = $message;
+        $this->mMessage = $message;
         return $this;
     }
 
     public function data(mixed $data): Result
     {
-        $this->data = $data;
+        $this->mData = $data;
         return $this;
     }
 
     public function status(bool $status): Result
     {
-        $this->status = $status;
+        $this->mStatus = $status;
         return $this;
     }
 
-    public mixed $data;
-    public string $message;
-    public bool $status;
+    public mixed $mData;
+    public string $mMessage;
+    public bool $mStatus;
 }

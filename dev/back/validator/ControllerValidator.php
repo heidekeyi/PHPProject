@@ -9,33 +9,33 @@ class ControllerValidator implements IValidator
 {
     public function __construct(string $uri, string $type)
     {
-        $this->result = new Result('');
-        $this->uri = preg_replace('/(\/\d+$)?/', '', $uri);
-        $this->type = $type;
+        $this->mResult = new Result('');
+        $this->mUri = preg_replace('/(\/\d+$)?/', '', $uri);
+        $this->mType = $type;
     }
 
     public function validate(): Result
     {
         $dir = 'controller';
-        $name = preg_replace('/(\w+\/)+(\w+$)/', '$2', $this->uri);
-        $name = ucwords($name) . ucwords($this->type) . ucwords($dir);
-        $uri = preg_replace("/\w+$/", $name, $this->uri);
+        $name = preg_replace('/(\w+\/)+(\w+$)/', '$2', $this->mUri);
+        $name = ucwords($name) . ucwords($this->mType) . ucwords($dir);
+        $uri = preg_replace("/\w+$/", $name, $this->mUri);
         $cls = [
             $dir,
-            $this->type,
+            $this->mType,
             ...explode('/', $uri),
             $name
         ];
         $cls = implode('\\', $cls);
         if (class_exists($cls)) {
-            $this->result->data($cls);
+            $this->mResult->data($cls);
         } else {
-            $this->result->error('controller is not exist');
+            $this->mResult->error('controller is not exist');
         }
-        return $this->result;
+        return $this->mResult;
     }
 
-    private Result $result;
-    readonly private string $uri;
-    readonly private string $type;
+    private Result $mResult;
+    readonly private string $mUri;
+    readonly private string $mType;
 }

@@ -11,11 +11,11 @@ class Router
 {
     public function __construct()
     {
-        $this->result = new Result('');
-        $this->uri = new Result('');
-        $this->type = new Result('');
-        $this->controller = new Result('');
-        $this->next = true;
+        $this->mResult = new Result('');
+        $this->mUri = new Result('');
+        $this->mType = new Result('');
+        $this->mController = new Result('');
+        $this->mNext = true;
     }
 
     public function execute(): void
@@ -29,39 +29,39 @@ class Router
 
     private function uri(): Router
     {
-        $this->result
-            = $this->uri
+        $this->mResult
+            = $this->mUri
             = (new UriValidator())->validate();
         return $this;
     }
 
     private function type(): Router
     {
-        if ($this->result->status) {
-            $this->result
-                = $this->type
-                = (new TypeValidator($this->uri->data))->validate();
-            $this->next = !empty($this->result->data);
+        if ($this->mResult->mStatus) {
+            $this->mResult
+                = $this->mType
+                = (new TypeValidator($this->mUri->mData))->validate();
+            $this->mNext = !empty($this->mResult->mData);
         }
         return $this;
     }
 
     private function controller(): Router
     {
-        if ($this->next && $this->result->status) {
-            $this->result
-                = $this->controller
-                = (new ControllerValidator($this->uri->data, $this->type->data))->validate();
+        if ($this->mNext && $this->mResult->mStatus) {
+            $this->mResult
+                = $this->mController
+                = (new ControllerValidator($this->mUri->mData, $this->mType->mData))->validate();
         }
         return $this;
     }
 
     private function route(): Router
     {
-        if ($this->next && $this->result->status) {
-            $cls = $this->controller->data;
-            $method = $this->type->data;
-            $this->result = call_user_func([new $cls($this->uri->data), $method]);
+        if ($this->mNext && $this->mResult->mStatus) {
+            $cls = $this->mController->mData;
+            $method = $this->mType->mData;
+            $this->mResult = call_user_func([new $cls($this->mUri->mData), $method]);
         }
 
         return $this;
@@ -69,12 +69,12 @@ class Router
 
     private function json(): void
     {
-        echo json_encode($this->result);
+        echo json_encode($this->mResult);
     }
 
-    private Result $uri;
-    private Result $type;
-    private Result $controller;
-    private Result $result;
-    private bool $next;
+    private Result $mUri;
+    private Result $mType;
+    private Result $mController;
+    private Result $mResult;
+    private bool $mNext;
 }
