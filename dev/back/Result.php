@@ -4,7 +4,7 @@ namespace Result;
 
 class Result
 {
-    public function __construct(mixed $data, string $message = '', bool $status = true)
+    public function __construct(array|string $data, string $message = '', bool $status = true)
     {
         $this->mData = $data;
         $this->mMessage = $message;
@@ -13,28 +13,57 @@ class Result
 
     public function error(string $message): Result
     {
-        return $this->message($message)->status(false);
+        return $this->setMessage($message)->setStatus(false);
     }
 
-    public function message(string $message): Result
+    public function getMessage(): string
+    {
+        return $this->mMessage;
+    }
+
+    public function setMessage(string $message): Result
     {
         $this->mMessage = $message;
         return $this;
     }
 
-    public function data(mixed $data): Result
+    public function getData(): array|string
+    {
+        return $this->mData;
+    }
+
+    public function setData(array|string $data): Result
     {
         $this->mData = $data;
         return $this;
     }
 
-    public function status(bool $status): Result
+    public function getStatus(): bool
+    {
+        return $this->mStatus;
+    }
+
+    public function setStatus(bool $status): Result
     {
         $this->mStatus = $status;
         return $this;
     }
 
-    public mixed $mData;
-    public string $mMessage;
-    public bool $mStatus;
+    public function __serialize(): array
+    {
+        return $this->serialize();
+    }
+
+    public function serialize(): array
+    {
+        return [
+            'status' => $this->getStatus(),
+            'data' => $this->getData(),
+            'message' => $this->getMessage()
+        ];
+    }
+
+    private array|string $mData;
+    private string $mMessage;
+    private bool $mStatus;
 }

@@ -24,52 +24,56 @@ class Router
             ->type()
             ->controller()
             ->route()
-            ->json();
+            ->response();
     }
 
     private function uri(): Router
     {
-        $this->mResult
-            = $this->mUri
-            = (new UriValidator())->validate();
+        $result = (new UriValidator())->validate();
+        $this->mResult = $result;
+        $this->mUri = $result;
         return $this;
     }
 
     private function type(): Router
     {
-        if ($this->mResult->mStatus) {
-            $this->mResult
-                = $this->mType
-                = (new TypeValidator($this->mUri->mData))->validate();
-            $this->mNext = !empty($this->mResult->mData);
+        if ($this->mResult->getStatus()) {
+            $uri = $this->mUri->getData();
+            $result = (new TypeValidator($uri))->validate();
+            $this->mResult = $result;
+            $this->mType = $result;
+            $this->mNext = !empty($this->mResult->getData());
         }
         return $this;
     }
 
     private function controller(): Router
     {
-        if ($this->mNext && $this->mResult->mStatus) {
-            $this->mResult
-                = $this->mController
-                = (new ControllerValidator($this->mUri->mData, $this->mType->mData))->validate();
+        if ($this->mNext && $this->mResult->getStatus()) {
+            $uri = $this->mUri->getData();
+            $type = $this->mType->getData();
+            $result = (new ControllerValidator($uri, $type))->validate();
+            $this->mResult = $result;
+            $this->mController = $result;
         }
         return $this;
     }
 
     private function route(): Router
     {
-        if ($this->mNext && $this->mResult->mStatus) {
-            $cls = $this->mController->mData;
-            $method = $this->mType->mData;
-            $this->mResult = call_user_func([new $cls($this->mUri->mData), $method]);
+        if ($this->mNext && $this->mResult->getStatus()) {
+            $cls = $this->mController->getData();
+            $method = $this->mType->getData();
+            $uri = $this->mUri->getData();
+            $this->mResult = call_user_func([new $cls($uri), $method]);
         }
 
         return $this;
     }
 
-    private function json(): void
+    private function response(): void
     {
-        echo json_encode($this->mResult);
+        echo json_encode($this->mResult->serialize());
     }
 
     private Result $mUri;

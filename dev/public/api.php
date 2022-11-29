@@ -2,7 +2,6 @@
 
 namespace api;
 
-(include_once '../back/autoLoad.php')();
-(include_once '../back/header.php')();
-(include_once '../back/bootstrap.php')();
-
+(include_once '../back/AutoLoad.php')();
+(include_once '../back/Header.php')();
+(include_once '../back/Bootstrap.php')();

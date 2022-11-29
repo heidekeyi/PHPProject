@@ -36,5 +36,5 @@ class UriValidator implements IValidator
     }
 
     private Result $mResult;
-    private string $mUri;
+    readonly private string $mUri;
 }

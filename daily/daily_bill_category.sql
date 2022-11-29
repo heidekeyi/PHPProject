@@ -11,7 +11,7 @@
  Target Server Version : 80027
  File Encoding         : 65001
 
- Date: 29/11/2022 00:12:48
+ Date: 30/11/2022 00:04:50
 */
 
 SET NAMES utf8mb4;
@@ -536,6 +536,7 @@ INSERT INTO `daily_bill_record` VALUES (431, 1669045026, 36, -3600, 1668960000);
 INSERT INTO `daily_bill_record` VALUES (432, 1669125473, 7, -600, 1669046400);
 INSERT INTO `daily_bill_record` VALUES (433, 1669556754, 7, -600, 1669305600);
 INSERT INTO `daily_bill_record` VALUES (434, 1669649937, 7, -600, 1669564800);
+INSERT INTO `daily_bill_record` VALUES (435, 1669737790, 36, -1300, 1669564800);
 
 -- ----------------------------
 -- Table structure for daily_name
@@ -999,6 +1000,8 @@ INSERT INTO `daily_sport_record` VALUES (270, 1665234314, 3, 1, 6, 1665158400);
 INSERT INTO `daily_sport_record` VALUES (271, 1665234323, 3, 1, 3, 1665158400);
 INSERT INTO `daily_sport_record` VALUES (272, 1666699467, 8, 1, 6, 1666627200);
 INSERT INTO `daily_sport_record` VALUES (273, 1667652428, 6, 3, 21, 1667577600);
+INSERT INTO `daily_sport_record` VALUES (274, 1669737821, 1, 1, 6, 1669651200);
+INSERT INTO `daily_sport_record` VALUES (275, 1669737833, 1, 1, 6, 1669651200);
 
 -- ----------------------------
 -- Table structure for daily_time_category

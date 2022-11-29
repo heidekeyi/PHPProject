@@ -28,7 +28,7 @@ class ControllerValidator implements IValidator
         ];
         $cls = implode('\\', $cls);
         if (class_exists($cls)) {
-            $this->mResult->data($cls);
+            $this->mResult->setData($cls);
         } else {
             $this->mResult->error('controller is not exist');
         }

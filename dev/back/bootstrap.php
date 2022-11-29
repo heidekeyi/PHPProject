@@ -1,9 +1,15 @@
 <?php
 
-namespace bootstrap;
+namespace Bootstrap;
 
 use Router\Router;
 
-return function (): void {
-    (new Router())->execute();
-};
+class Bootstrap
+{
+    public function __invoke(): void
+    {
+        (new Router())->execute();
+    }
+}
+
+return new Bootstrap();
