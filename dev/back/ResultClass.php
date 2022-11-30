@@ -1,8 +1,8 @@
 <?php
 
-namespace Result;
+namespace ResultClass;
 
-class Result
+class ResultClass
 {
     public function __construct(array|string $data, string $message = '', bool $status = true)
     {
@@ -11,7 +11,7 @@ class Result
         $this->mStatus = $status;
     }
 
-    public function error(string $message): Result
+    public function error(string $message): ResultClass
     {
         return $this->setMessage($message)->setStatus(false);
     }
@@ -21,7 +21,7 @@ class Result
         return $this->mMessage;
     }
 
-    public function setMessage(string $message): Result
+    public function setMessage(string $message): ResultClass
     {
         $this->mMessage = $message;
         return $this;
@@ -32,7 +32,7 @@ class Result
         return $this->mData;
     }
 
-    public function setData(array|string $data): Result
+    public function setData(array|string $data): ResultClass
     {
         $this->mData = $data;
         return $this;
@@ -43,7 +43,7 @@ class Result
         return $this->mStatus;
     }
 
-    public function setStatus(bool $status): Result
+    public function setStatus(bool $status): ResultClass
     {
         $this->mStatus = $status;
         return $this;

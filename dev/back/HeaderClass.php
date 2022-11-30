@@ -1,9 +1,9 @@
 <?php
 
 
-namespace Header;
+namespace HeaderClass;
 
-class Header
+class HeaderClass
 {
     public function __invoke(): void
     {
@@ -13,4 +13,4 @@ class Header
     }
 }
 
-return new Header();
+return new HeaderClass();

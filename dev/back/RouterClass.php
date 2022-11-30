@@ -1,20 +1,20 @@
 <?php
 
-namespace Router;
+namespace RouterClass;
 
-use Result\Result;
-use validator\ControllerValidator\ControllerValidator;
-use validator\TypeValidator\TypeValidator;
-use validator\UriValidator\UriValidator;
+use ResultClass\ResultClass;
+use validator\ControllerValidatorClass\ControllerValidatorClass;
+use validator\TypeValidatorClass\TypeValidatorClass;
+use validator\UriValidatorClass\UriValidatorClass;
 
-class Router
+class RouterClass
 {
     public function __construct()
     {
-        $this->mResult = new Result('');
-        $this->mUri = new Result('');
-        $this->mType = new Result('');
-        $this->mController = new Result('');
+        $this->mResult = new ResultClass('');
+        $this->mUri = new ResultClass('');
+        $this->mType = new ResultClass('');
+        $this->mController = new ResultClass('');
         $this->mNext = true;
     }
 
@@ -27,19 +27,19 @@ class Router
             ->response();
     }
 
-    private function uri(): Router
+    private function uri(): RouterClass
     {
-        $result = (new UriValidator())->validate();
+        $result = (new UriValidatorClass())->validate();
         $this->mResult = $result;
         $this->mUri = $result;
         return $this;
     }
 
-    private function type(): Router
+    private function type(): RouterClass
     {
         if ($this->mResult->getStatus()) {
             $uri = $this->mUri->getData();
-            $result = (new TypeValidator($uri))->validate();
+            $result = (new TypeValidatorClass($uri))->validate();
             $this->mResult = $result;
             $this->mType = $result;
             $this->mNext = !empty($this->mResult->getData());
@@ -47,19 +47,18 @@ class Router
         return $this;
     }
 
-    private function controller(): Router
+    private function controller(): RouterClass
     {
         if ($this->mNext && $this->mResult->getStatus()) {
             $uri = $this->mUri->getData();
-            $type = $this->mType->getData();
-            $result = (new ControllerValidator($uri, $type))->validate();
+            $result = (new ControllerValidatorClass($uri))->validate();
             $this->mResult = $result;
             $this->mController = $result;
         }
         return $this;
     }
 
-    private function route(): Router
+    private function route(): RouterClass
     {
         if ($this->mNext && $this->mResult->getStatus()) {
             $cls = $this->mController->getData();
@@ -76,9 +75,9 @@ class Router
         echo json_encode($this->mResult->serialize());
     }
 
-    private Result $mUri;
-    private Result $mType;
-    private Result $mController;
-    private Result $mResult;
+    private ResultClass $mUri;
+    private ResultClass $mType;
+    private ResultClass $mController;
+    private ResultClass $mResult;
     private bool $mNext;
 }

@@ -1,8 +1,8 @@
 <?php
 
-namespace AutoLoad;
+namespace AutoLoadClass;
 
-class AutoLoad
+class AutoLoadClass
 {
     static protected bool $once = false;
 
@@ -28,4 +28,4 @@ class AutoLoad
     }
 }
 
-return new AutoLoad();
+return new AutoLoadClass();

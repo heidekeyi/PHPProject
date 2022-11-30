@@ -1,8 +1,8 @@
 <?php
 
-namespace Config;
+namespace ConfigClass;
 
-class Config
+class ConfigClass
 {
     static protected array $msConfig = [
         'driver' => 'mysql',

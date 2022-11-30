@@ -1,21 +1,21 @@
 <?php
 
-namespace validator\TypeValidator;
+namespace validator\TypeValidatorClass;
 
-use Result\Result;
-use validator\IValidator\IValidator;
+use ResultClass\ResultClass;
+use validator\ValidatorInterface\ValidatorInterface;
 
-class TypeValidator implements IValidator
+class TypeValidatorClass implements ValidatorInterface
 {
     public function __construct(string $uri)
     {
         $this->mIsRest = preg_match('/\d+$/', $uri);
         $this->mType = strtolower($_SERVER['REQUEST_METHOD']) ?? '';
-        $this->mResult = new Result('');
+        $this->mResult = new ResultClass('');
 
     }
 
-    public function validate(): Result
+    public function validate(): ResultClass
     {
         return $this->insert()
             ->select()
@@ -25,7 +25,7 @@ class TypeValidator implements IValidator
             ->mResult;
     }
 
-    private function insert(): TypeValidator
+    private function insert(): TypeValidatorClass
     {
         if ($this->mResult->getStatus() && $this->mType === 'post') {
             if ($this->mIsRest) {
@@ -37,7 +37,7 @@ class TypeValidator implements IValidator
         return $this;
     }
 
-    private function select(): TypeValidator
+    private function select(): TypeValidatorClass
     {
         if ($this->mResult->getStatus() && $this->mType === 'get') {
             $this->mResult->setData(__FUNCTION__);
@@ -45,7 +45,7 @@ class TypeValidator implements IValidator
         return $this;
     }
 
-    private function update(): TypeValidator
+    private function update(): TypeValidatorClass
     {
         if ($this->mResult->getStatus() && $this->mType === 'put') {
             if ($this->mIsRest) {
@@ -57,7 +57,7 @@ class TypeValidator implements IValidator
         return $this;
     }
 
-    private function delete(): TypeValidator
+    private function delete(): TypeValidatorClass
     {
         if ($this->mResult->getStatus() && $this->mType === 'delete') {
             if ($this->mIsRest) {
@@ -69,7 +69,7 @@ class TypeValidator implements IValidator
         return $this;
     }
 
-    private function preRequest(): TypeValidator
+    private function preRequest(): TypeValidatorClass
     {
         if ($this->mResult->getStatus() && $this->mType === 'options') {
             $this->mResult->setMessage('pass')->setData('');
@@ -77,7 +77,7 @@ class TypeValidator implements IValidator
         return $this;
     }
 
-    private Result $mResult;
+    private ResultClass $mResult;
     readonly private bool $mIsRest;
     readonly private string $mType;
 }
