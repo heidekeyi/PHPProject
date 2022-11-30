@@ -2,6 +2,9 @@
 
 namespace api;
 
-(include_once '../back/AutoLoadClass.php')();
-(include_once '../back/HeaderClass.php')();
-(include_once '../back/BootstrapClass.php')();
+include_once '../back/CAutoLoad.php';
+\CAutoLoad\CAutoLoad::register();
+
+use CRouter\CRouter;
+
+echo json_encode(CRouter::execute());
