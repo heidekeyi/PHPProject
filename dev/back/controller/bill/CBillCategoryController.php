@@ -1,26 +1,30 @@
 <?php
 
-namespace controller\CNameController;
+namespace controller\bill\CBillCategoryController;
 
 use controller\IListController\IListController;
 use controller\IRestController\IRestController;
 use CResult\CResult;
-use field\CNameField\CNameField;
+use field\CBillCategoryField\CBillCategoryField;
 
-class CNameController implements IListController, IRestController
+class CBillCategoryController implements IListController, IRestController
 {
+
     public function list(): CResult
     {
-        $field = new CNameField();
+        $field = new CBillCategoryField();
         return new CResult([
             $field->table(false) => $field->table(true),
             $field->id(false) => $field->id(true),
-            $field->createTime(false) => $field->createTime(true),
-            $field->name(false) => $field->name(true)
+            $field->createTime(false) => $field->id(true),
+            $field->name(false) => $field->name(true),
+            $field->nameId(false) => $field->nameId(true),
+            $field->parentName(false) => $field->parentName(true),
+            $field->parentId(false) => $field->parentId(true)
         ]);
     }
 
-    public function select(): CResult
+    public function insert(): CResult
     {
         return new CResult(__METHOD__);
     }
@@ -35,7 +39,7 @@ class CNameController implements IListController, IRestController
         return new CResult(__METHOD__);
     }
 
-    public function insert(): CResult
+    public function select(): CResult
     {
         return new CResult(__METHOD__);
     }

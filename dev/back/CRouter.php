@@ -100,7 +100,7 @@ class CRouter
     private function method(): void
     {
         $type = $this->type;
-        if ($this->hasId && $type == 'get') {
+        if ($type == 'get' && !$this->hasId) {
             $type = 'list';
         }
         $map = [
