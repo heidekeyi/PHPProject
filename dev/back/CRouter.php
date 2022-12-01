@@ -52,7 +52,7 @@ class CRouter
     {
         $this->result = (new CValidator(__FUNCTION__, $this->uri))
             ->empty()
-            ->regular('/^[a-z]{3,18}(\/[a-z]{3,18}){0,3}(\/[1-9]\d{0,17})*$/')
+            ->regular('/^[a-z]{3,18}(\/[a-z]{3,18}){0,3}(\/[1-9]\d{0,8})*$/')
             ->result();
     }
 

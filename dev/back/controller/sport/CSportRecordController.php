@@ -1,30 +1,30 @@
 <?php
 
-namespace controller\time\CTimeRecordController;
+namespace controller\sport\CSportRecordController;
 
 use controller\IListController\IListController;
 use controller\IRestController\IRestController;
 use CResult\CResult;
-use field\CTimeRecordField\CTimeRecordField;
+use field\CSportRecordField\CSportRecordField;
 
-class CTimeRecordController implements IRestController, IListController
+class CSportRecordController implements IListController, IRestController
 {
+
     public function list(): CResult
     {
-        $field = new CTimeRecordField();
+        $field = new CSportRecordField();
         return new CResult([
             $field->table(false) => $field->table(true),
             $field->id(false) => $field->id(true),
             $field->createTime(false) => $field->id(true),
             $field->categoryName(false) => $field->categoryName(true),
             $field->categoryId(false) => $field->categoryId(true),
-            $field->date(false) => $field->date(true),
-            $field->beginTime(false) => $field->beginTime(true),
-            $field->endTime(false) => $field->endTime(true)
+            $field->quantity(false) => $field->quantity(true),
+            $field->date(false) => $field->date(true)
         ]);
     }
 
-    public function select(): CResult
+    public function insert(): CResult
     {
         return new CResult(__METHOD__);
     }
@@ -39,7 +39,7 @@ class CTimeRecordController implements IRestController, IListController
         return new CResult(__METHOD__);
     }
 
-    public function insert(): CResult
+    public function select(): CResult
     {
         return new CResult(__METHOD__);
     }

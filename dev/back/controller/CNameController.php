@@ -6,6 +6,7 @@ use controller\IListController\IListController;
 use controller\IRestController\IRestController;
 use CResult\CResult;
 use field\CNameField\CNameField;
+use model\CNameModel\CNameModel;
 
 class CNameController implements IListController, IRestController
 {
@@ -37,6 +38,11 @@ class CNameController implements IListController, IRestController
 
     public function insert(): CResult
     {
-        return new CResult(__METHOD__);
+        return $this->model()->insert(['name' => time() . '']);
+    }
+
+    private function model(): CNameModel
+    {
+        return new CNameModel();
     }
 }

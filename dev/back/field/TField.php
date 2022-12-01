@@ -4,6 +4,10 @@ namespace field\TField;
 
 use CConfig\CConfig;
 
+$sql = <<<A
+CREATE DATABASE `development` CHARACTER SET 'utf8mb4' COLLATE 'utf8mb4_0900_as_cs';
+A;
+
 trait TField
 {
     public function __construct()
