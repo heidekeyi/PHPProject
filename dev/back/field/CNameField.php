@@ -2,6 +2,7 @@
 
 namespace field\CNameField;
 
+use field\IField\IField;
 use field\TNameField\TNameField;
 
 $sql = <<<A
@@ -15,7 +16,7 @@ CREATE TABLE `daily_name`(
 A;
 
 
-class CNameField
+class CNameField implements IField
 {
     use TNameField;
 }

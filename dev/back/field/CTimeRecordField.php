@@ -2,6 +2,7 @@
 
 namespace field\CTimeRecordField;
 
+use field\IField\IField;
 use field\TCategoryField\TCategoryField;
 use field\TDateField\TDateField;
 
@@ -17,7 +18,7 @@ CREATE TABLE `daily_timeRecord`(
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_as_cs STATS_PERSISTENT = 0;
 A;
 
-class CTimeRecordField
+class CTimeRecordField implements IField
 {
     use TDateField;
     use TCategoryField;

@@ -2,6 +2,7 @@
 
 namespace field\CTimeCategoryField;
 
+use field\IField\IField;
 use field\TNameField\TNameField;
 use field\TNameIdField\TNameIdField;
 use field\TParentField\TParentField;
@@ -17,7 +18,7 @@ CREATE TABLE `daily_timeCategory`(
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_as_cs STATS_PERSISTENT = 0;
 A;
 
-class CTimeCategoryField
+class CTimeCategoryField implements IField
 {
     use TNameField;
     use TNameIdField;

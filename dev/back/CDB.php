@@ -27,7 +27,7 @@ class CDB
         }
     }
 
-    protected function dsn(CConfig $config): string
+    private function dsn(CConfig $config): string
     {
         $dsn = [
             $config->driver() . ':' . $config->host(),
@@ -83,10 +83,10 @@ class CDB
         }
     }
 
-    public function select(string $sql, array $values): void
+    public function select(string $sql, array $values): CResult
     {
         if (!$this->result->getStatus()) {
-            return;
+            return $this->result;
         }
         try {
             $sth = $this->PDO->prepare($sql);
@@ -95,6 +95,7 @@ class CDB
         } catch (Exception) {
             $this->result->error(__FUNCTION__ . '(db): ' . $sql);
         }
+        return $this->result;
     }
 
     private CResult $result;

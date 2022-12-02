@@ -2,6 +2,7 @@
 
 namespace field\CSportCategoryField;
 
+use field\IField\IField;
 use field\TNameField\TNameField;
 use field\TNameIdField\TNameIdField;
 
@@ -17,7 +18,7 @@ CREATE TABLE `daily_sportCategory`(
 A;
 
 
-class CSportCategoryField
+class CSportCategoryField implements IField
 {
     use TNameField;
     use TNameIdField;

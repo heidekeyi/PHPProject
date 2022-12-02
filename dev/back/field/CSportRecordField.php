@@ -2,6 +2,7 @@
 
 namespace field\CSportRecordField;
 
+use field\IField\IField;
 use field\TCategoryField\TCategoryField;
 use field\TDateField\TDateField;
 use field\TQuantityField\TQuantityField;
@@ -17,7 +18,7 @@ CREATE TABLE `daily_sportRecord`(
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_as_cs STATS_PERSISTENT = 0;
 A;
 
-class CSportRecordField
+class CSportRecordField implements IField
 {
     use TQuantityField;
     use TDateField;
