@@ -1,22 +1,20 @@
 <?php
 
-namespace model\CExistModel;
+namespace model\validator\CPrimaryModelValidator;
 
 use CResult\CResult;
 use field\IField\IField;
-use model\CFetchModel\CFetchModel;
+use model\validator\CUniqueModelValidator\CUniqueModelValidator;
 
-class CExistModel
+class CPrimaryModelValidator
 {
     public function field(string $table, string $field, string $value): CResult
     {
-        $model = new CFetchModel();
-        $result = $model->equal($table, $field, $value);
-        if (!$result->getStatus()) {
-            return $result;
-        }
-        if (empty($result->getData())) {
+        $result = (new CUniqueModelValidator())->unique($table, $field, $value);
+        if ($result->getStatus()) {
             $result->error($field . '=' . $value . ' is not exist');
+        } else {
+            $result->setStatus(true)->setMessage('')->setData([]);
         }
         return $result;
     }

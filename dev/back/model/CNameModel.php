@@ -4,6 +4,7 @@ namespace model\CNameModel;
 
 use CResult\CResult;
 use field\CNameField\CNameField;
+use model\CInsertModel\CInsertModel;
 
 class CNameModel
 {
@@ -14,7 +15,11 @@ class CNameModel
 
     public function insert(array $data): CResult
     {
-        return new CResult($data);
+        $field = $this->field();
+        $data = [$field->name(true) => time() . ''];
+        return (new CInsertModel($data))
+            ->unique($field, [$field->name(true)])
+            ->insert($field);
     }
 
     public function field(): CNameField

@@ -33,8 +33,7 @@ class CConfig
 
     public function dbname(): string
     {
-        $name = $this->env() ? $this->production() : $this->development();
-        return $this->retrieve($name);
+        return $this->env() ? $this->production() : $this->development();
     }
 
     public function charset(): string

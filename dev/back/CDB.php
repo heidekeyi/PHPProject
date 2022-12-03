@@ -16,12 +16,13 @@ class CDB
         $this->result = new CResult([]);
         try {
             $config = new CConfig();
-            $this->PDO = new PDO(
+            $pdo = new PDO(
                 $this->dsn($config),
                 $config->username(),
                 $config->password()
             );
-            $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $this->PDO = $pdo;
         } catch (Exception) {
             $this->result->error('db connect error');
         }

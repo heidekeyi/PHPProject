@@ -12,12 +12,7 @@ class CFetchModel
         $this->CDB = new CDB();
     }
 
-    public function equal(string $table, string $field, string $value): CResult
-    {
-        return $this->equals($table, [$field => $value]);
-    }
-
-    public function equals(string $table, array $map): CResult
+    public function equal(string $table, array $map): CResult
     {
         $fields = array_keys($map);
         $sql = implode(' ', [
