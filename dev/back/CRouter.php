@@ -8,7 +8,12 @@ use CValidator\CValidator;
 
 class CRouter
 {
-    static public function execute(): array
+    static public function boostrap():void{
+        $router = new static();
+        echo json_encode($router->route());
+    }
+
+    public function route(): array
     {
         CHeader::header();
         $router = new CRouter();
@@ -33,8 +38,8 @@ class CRouter
         }
         $controller = $router->controller;
         $method = $router->method;
-        $uri = $router->uri;
-        $router->result = call_user_func([new $controller($uri), $method]);
+        $id = preg_replace('/\D+/', '', $router->uri);
+        $router->result = call_user_func([new $controller(), $method], $id);
         return $router->result->serialize();
     }
 

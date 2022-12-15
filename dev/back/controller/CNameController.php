@@ -21,17 +21,17 @@ class CNameController implements IListController, IRestController
         ]);
     }
 
-    public function select(): CResult
+    public function select(string $id): CResult
+    {
+        return $this->model()->select($id);
+    }
+
+    public function delete(string $id): CResult
     {
         return new CResult(__METHOD__);
     }
 
-    public function delete(): CResult
-    {
-        return new CResult(__METHOD__);
-    }
-
-    public function update(): CResult
+    public function update(string $id): CResult
     {
         return new CResult(__METHOD__);
     }

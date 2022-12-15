@@ -8,9 +8,9 @@ interface IRestController
 {
     public function insert(): CResult;
 
-    public function delete(): CResult;
+    public function delete(string $id): CResult;
 
-    public function update(): CResult;
+    public function update(string $id): CResult;
 
-    public function select(): CResult;
+    public function select(string $id): CResult;
 }
